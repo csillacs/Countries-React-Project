@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-// import { Link } from "react-router-dom";
 import axios from "axios";
 
-import Countries from "../components/countries";
+import Table from "../components/table";
 
 export default function Home() {
   const [countries, setCountries] = useState([]);
@@ -19,8 +18,8 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
-      <Countries countries={countries} />
+    <div className="container mx-auto">
+      <Table countries={countries} />
     </div>
   );
 }
