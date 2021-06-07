@@ -6,9 +6,14 @@ export default function Home() {
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
-    axios.get("https://restcountries.eu/rest/v2/all").then((response) => {
-      setCountries(response.data);
-    });
+    axios
+      .get("https://restcountries.eu/rest/v2/all")
+      .then((response) => {
+        setCountries(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   const Country = ({ capital, name, population, languages, flag }) => {
