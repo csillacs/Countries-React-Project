@@ -1,5 +1,5 @@
 import React from "react";
-import TableRow from "./tableRow";
+import TableRow from "./TableRow";
 
 export default function TableBody({ countries }) {
   return (

@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 
-import Table from "../components/table";
+import Table from "../components/Table";
+import useCountries from "../custom-hooks/useCountries";
 
 export default function Home() {
-  const [countries, setCountries] = useState([]);
+  const [error, countries] = useCountries();
 
-  useEffect(() => {
-    axios
-      .get("https://restcountries.eu/rest/v2/all")
-      .then((response) => {
-        setCountries(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  // const [countries, setCountries] = useState([]);
+  // const [error, setError] = useState(null);
+
+  // useEffect(() => {
+  //   axios
+  //     .get("https://restcountries.eu/rest/v2/all")
+  //     .then((response) => {
+  //       setCountries(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   return (
     <div className="container mx-auto">

@@ -1,6 +1,6 @@
 import React from "react";
-import TableHeader from "./tableHeader";
-import TableBody from "./tableBody";
+import TableHeader from "./TableHeader";
+import TableBody from "./TableBody";
 
 export default function Table({ countries }) {
   return (
