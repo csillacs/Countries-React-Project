@@ -3,24 +3,27 @@ import { useEffect, useState } from "react";
 export default function useCountries(name) {
   const [countries, setCountries] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const url = `https://restcountries.eu/rest/v2/${
     name ? `name/${name}` : "all"
   }`;
 
-  const fetchCountries = async () => {
-    try {
-      const response = await fetch(url).then((response) => response.json());
-      //   console.log(response);
-      setCountries(response);
-    } catch (error) {
-      setError(error);
-    }
-  };
-
   useEffect(() => {
-    fetchCountries();
-  }, [url]);
+    const fetchCountries = async () => {
+      try {
+        const response = await fetch(url);
+        const countries = await response.json();
+        setIsLoading(false);
+        setCountries(countries);
+      } catch (error) {
+        setIsLoading(false);
+        setError(error);
+      }
+    };
 
-  return [error, countries];
+    fetchCountries();
+  }, [url, name]);
+
+  return [isLoading, error, countries];
 }

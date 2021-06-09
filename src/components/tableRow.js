@@ -10,8 +10,8 @@ export default function TableRow({
 }) {
   return (
     <tr className="border-b border-gray-200">
-      <td className="px-6 py-4">
-        <img alt={name} src={flag} className="w-max	" />
+      <td className="px-6 py-0">
+        <img alt={name} src={flag} className="w-full" />
       </td>
       <td className="px-6 py-4">
         <div className="text-base text-gray-900">{name} </div>
