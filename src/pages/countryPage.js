@@ -1,40 +1,50 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
+import Layout from "../components/Layout";
+import ThemeButton from "../context/ThemeButton";
+import useCountries from "../custom-hooks/useCountries";
 
 const CountryPage = () => {
-  const [country, setCountry] = useState(null);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [country, setCountry] = useState(null);
+  // const [error, setError] = useState(null);
+  // const [isLoading, setIsLoading] = useState(true);
 
   const { name } = useParams();
 
-  useEffect(() => {
-    axios
-      .get(`https://restcountries.eu/rest/v2/name/${name}`)
-      .then((response) => {
-        setIsLoading(false);
-        setCountry(response.data[0]);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        setError(error);
-      });
-  }, [name]);
+  const countries = useCountries(
+    `https://restcountries.eu/rest/v2/name/${name}`
+  );
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  const country = countries[0];
+  // useEffect(() => {
+  //   axios
+  //     .get(`https://restcountries.eu/rest/v2/name/${name}`)
+  //     .then((response) => {
+  //       setIsLoading(false);
+  //       setCountry(response.data[0]);
+  //     })
+  //     .catch((error) => {
+  //       setIsLoading(false);
+  //       setError(error);
+  //     });
+  // }, [name]);
 
-  if (!isLoading) {
-    if (country === null) {
-      return <div>{error && "Something went wrong :("}</div>;
-    }
-  }
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
+
+  // if (!isLoading) {
+  //   if (country === null) {
+  //     return <div>{error && "Something went wrong :("}</div>;
+  //   }
+  // }
 
   if (country) {
     return (
-      <div className="p-10">
+      <Layout>
+        <ThemeButton />
+
         <h1>{country.name}</h1>
         <p>capital: {country.capital}</p>
         <p>population: {country.population}</p>
@@ -53,8 +63,10 @@ const CountryPage = () => {
             Back
           </Link>{" "}
         </button>
-      </div>
+      </Layout>
     );
   }
+
+  return <div>Loading</div>;
 };
 export default CountryPage;

@@ -14,16 +14,28 @@ export default function TableRow({
         <img alt={name} src={flag} className="w-full" />
       </td>
       <td className="px-6 py-4">
-        <div className="text-base text-gray-900">{name} </div>
+        <div className="text-base text-gray-900 dark:text-white">
+          <Link
+            className="no-underline"
+            to={`/countries/${name.toLowerCase()}`}
+          >
+            {name}
+          </Link>{" "}
+        </div>
       </td>
       <td className="px-6 py-4">
-        <div className="text-base text-gray-900">{population} </div>
+        <div className="text-base text-gray-900 dark:text-white">
+          {population}{" "}
+        </div>
       </td>
       <td className="px-6 py-4">
-        <div className="text-base text-gray-900"> {region} </div>
+        <div className="text-base text-gray-900 dark:text-white">
+          {" "}
+          {region}{" "}
+        </div>
       </td>
       <td className="px-6 py-4">
-        <div className="text-base text-gray-900">
+        <div className="text-base text-gray-900 dark:text-white">
           {languages.map(({ name, iso639_1 }) => {
             return <div key={iso639_1}>{name}</div>;
           })}
@@ -35,12 +47,7 @@ export default function TableRow({
           className="bg-blue-500 hover:bg-blue-700 text-white text-sm py-1 px-2 border border-gray-400 rounded shadow "
           key={name}
         >
-          <Link
-            className="no-underline"
-            to={`/countries/${name.toLowerCase()}`}
-          >
-            show
-          </Link>{" "}
+          Like
         </button>
       </td>
     </tr>

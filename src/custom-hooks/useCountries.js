@@ -1,29 +1,34 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllCountries } from "../redux/actions";
 
-export default function useCountries(name) {
-  const [countries, setCountries] = useState([]);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+export default function useCountries(url) {
+  // const [countries, setCountries] = useState([]);
+  // const [error, setError] = useState(null);
+  // const [isLoading, setIsLoading] = useState(true);
 
-  const url = `https://restcountries.eu/rest/v2/${
-    name ? `name/${name}` : "all"
-  }`;
+  const dispatch = useDispatch();
+  const countries = useSelector((state) => state.allCountries.countries);
+
+  // let country = useSelector(state => state.allCountries.country);
 
   useEffect(() => {
-    const fetchCountries = async () => {
-      try {
-        const response = await fetch(url);
-        const countries = await response.json();
-        setIsLoading(false);
-        setCountries(countries);
-      } catch (error) {
-        setIsLoading(false);
-        setError(error);
-      }
-    };
+    // const fetchCountries = async () => {
+    //   try {
+    //     const response = await fetch(url);
+    //     const countries = await response.json();
+    //     setIsLoading(false);
+    //     setCountries(countries);
+    //   } catch (error) {
+    //     setIsLoading(false);
+    //     setError(error);
+    //   }
+    // };
 
-    fetchCountries();
-  }, [url, name]);
+    // fetchCountries();
+    dispatch(getAllCountries(url));
+  }, [dispatch, url]);
 
-  return [isLoading, error, countries];
+  // return [isLoading, error, countries];
+  return countries;
 }

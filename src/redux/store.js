@@ -1,15 +1,32 @@
-import { createStore } from "redux";
-import { combineReducers } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { createStore, compose, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 
-import allCountries from "./reducers/allCountries";
-import countryByName from "./reducers/countryByName";
+import reducers from "./reducers/index";
 
-const reducers = combineReducers({
-  countries: allCountries,
-  country: countryByName,
-});
+const storeInitState = {
+  allCountries: { countries: [], input: "" },
+  countryByName: { country: {} },
+};
 
-const store = createStore(reducers, composeWithDevTools());
+const makeStore = () => {
+  const middlewares = [thunk];
 
-export default store;
+  let composeEnhancers = compose;
+
+  if (process.env.NODE_ENV === "development") {
+    if (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {
+      composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+        trace: true,
+      });
+    }
+  }
+  const store = createStore(
+    reducers,
+    storeInitState,
+    composeEnhancers(applyMiddleware(...middlewares))
+  );
+
+  return store;
+};
+
+export default makeStore;
