@@ -1,6 +1,7 @@
 import React from "react";
 import ThemeButton from "../../context/ThemeButton";
 import SearchField from "./SearchField";
+import BasketDrawer from "./BasketDrawer";
 
 export default function Nav() {
   return (
@@ -11,7 +12,9 @@ export default function Nav() {
       <div className="w-1/3 inline-flex		">
         <SearchField />
       </div>
-      <div className="w-1/3 inline-flex		">Favorites</div>
+      <div className="w-1/3 inline-flex		">
+        <BasketDrawer />
+      </div>
     </div>
   );
 }

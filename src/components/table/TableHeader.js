@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function TableHeader() {
+export default function TableHeader({ requestSort, getClassNamesFor }) {
   return (
     <thead className="bg-gray-50 dark:bg-gray-900">
       <tr>
@@ -14,19 +14,38 @@ export default function TableHeader() {
           scope="col"
           className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-white w-1/6"
         >
-          Name
+          {" "}
+          <button
+            type="button"
+            onClick={() => requestSort("name")}
+            className={getClassNamesFor("name")}
+          >
+            Name
+          </button>
         </th>
         <th
           scope="col"
           className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-white w-1/6"
         >
-          Population
+          <button
+            type="button"
+            onClick={() => requestSort("population")}
+            className={getClassNamesFor("population")}
+          >
+            Population
+          </button>
         </th>
         <th
           scope="col"
           className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-white w-1/6"
         >
-          Region
+          <button
+            type="button"
+            onClick={() => requestSort("region")}
+            className={getClassNamesFor("region")}
+          >
+            Region
+          </button>
         </th>
         <th
           scope="col"

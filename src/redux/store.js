@@ -6,6 +6,7 @@ import reducers from "./reducers/index";
 const storeInitState = {
   allCountries: { countries: [], input: "" },
   countryByName: { country: {} },
+  favorites: { favoriteCountries: [] },
 };
 
 const makeStore = () => {

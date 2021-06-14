@@ -1,21 +1,15 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-
+import useFavorites from "../../custom-hooks/useFavorites";
+import UnlikeButton from "../UnlikeButton";
 export default function BasketDrawer() {
-  const dispatch = useDispatch();
-  const { favorites } = useSelector((state) => ({ favorites: state.basket }));
+  const { favoriteCountries } = useFavorites();
   return (
     <div>
-      {favorites.length} in shopping basket
-      {favorites.map((favorite) => (
-        <div>
-          <label> {favorite.name}</label>
-          <button
-            type="button"
-            onClick={() => dispatch(removeFavorite(favorite))}
-          >
-            Remove{" "}
-          </button>
+      {favoriteCountries.length} Favorite countries
+      {favoriteCountries.map((favorite) => (
+        <div key={favorite.name}>
+          <p> {favorite.name}</p>
+          <UnlikeButton favorite={favorite} />
         </div>
       ))}
     </div>

@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import LikeButton from "../LikeButton";
+import UnlikeButton from "../UnlikeButton";
+import useFavorites from "../../custom-hooks/useFavorites";
 
-export default function TableRow({
-  name,
-  region,
-  population,
-  languages,
-  flag,
-}) {
+export default function TableRow({ country }) {
+  const { favoriteCountries } = useFavorites();
+
+  const { name, region, population, languages, flag } = country;
   return (
     <tr className="border-b border-gray-200">
       <td className="px-6 py-0">
@@ -43,12 +43,10 @@ export default function TableRow({
       </td>
 
       <td className="px-6 py-4 ">
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white text-sm py-1 px-2 border border-gray-400 rounded shadow "
-          key={name}
-        >
-          Like
-        </button>
+        <LikeButton country={country} />
+        {favoriteCountries.map((favorite) => (
+          <UnlikeButton favorite={favorite} />
+        ))}
       </td>
     </tr>
   );
