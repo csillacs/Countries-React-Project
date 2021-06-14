@@ -44,9 +44,6 @@ export default function TableRow({ country }) {
 
       <td className="px-6 py-4 ">
         <LikeButton country={country} />
-        {favoriteCountries.map((favorite) => (
-          <UnlikeButton favorite={favorite} />
-        ))}
       </td>
     </tr>
   );
