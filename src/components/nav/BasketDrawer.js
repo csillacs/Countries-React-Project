@@ -8,8 +8,10 @@ export default function BasketDrawer() {
       {favoriteCountries.length} Favorite countries
       {favoriteCountries.map((favorite) => (
         <div key={favorite.name}>
-          <p> {favorite.name}</p>
-          <UnlikeButton favorite={favorite} />
+          <p>
+            <UnlikeButton favorite={favorite} />
+            {favorite.name}
+          </p>
         </div>
       ))}
     </div>

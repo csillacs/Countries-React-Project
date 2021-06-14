@@ -1,12 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import LikeButton from "../LikeButton";
-import UnlikeButton from "../UnlikeButton";
-import useFavorites from "../../custom-hooks/useFavorites";
 
 export default function TableRow({ country }) {
-  const { favoriteCountries } = useFavorites();
-
   const { name, region, population, languages, flag } = country;
   return (
     <tr className="border-b border-gray-200">
